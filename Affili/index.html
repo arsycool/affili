@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full bg-slate-900 text-slate-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AffiliScript AI - Generator Script Konten Afiliasi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f5ff',
+                            100: '#e0ebff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            400: '#60a5fa',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="h-full font-sans bg-slate-950 text-slate-100 flex flex-col min-h-screen">
+
+    <!-- Header Navigation -->
+    <header class="border-b border-slate-800 bg-slate-900/80 sticky top-0 z-40 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-500 to-purple-500 flex items-center justify-center shadow-lg shadow-blue-500/20">
+                    <i class="fa-solid fa-wand-magic-sparkles text-white text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="font-extrabold text-lg tracking-tight bg-gradient-to-r from-white via-slate-200 to-blue-400 bg-clip-text text-transparent">AffiliScript <span class="text-xs px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30">AI PRO</span></h1>
+                    <p class="text-xs text-slate-400 hidden sm:block">Generator Script Konten untuk Affiliate Marketer</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Gemini AI Powered
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- LEFT PANEL: Inputs & Options -->
+        <section class="lg:col-span-5 space-y-6">
+            
+            <!-- Main Input Card -->
+            <div class="glass-card rounded-2xl p-6 shadow-xl space-y-5">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                    <h2 class="font-bold text-base text-white flex items-center gap-2">
+                        <i class="fa-solid fa-sliders text-blue-400"></i> Informasi Produk
+                    </h2>
+                    <span class="text-xs text-slate-400">Langkah 1 dari 2</span>
+                </div>
+
+                <!-- Product Scan / Camera Trigger Button -->
+                <div class="bg-slate-800/60 rounded-xl p-3.5 border border-slate-700/60 flex items-center justify-between gap-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 shrink-0">
+                            <i class="fa-solid fa-camera text-sm"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold text-white">Scan / Upload Foto Produk</p>
+                            <p class="text-[11px] text-slate-400">AI akan mendeteksi brand otomatis</p>
+                        </div>
+                    </div>
+                    <button id="btnOpenScanModal" type="button" class="px-3 py-1.5 bg-blue-600/80 hover:bg-blue-600 text-white text-xs font-medium rounded-lg transition-all flex items-center gap-1.5 shadow-sm">
+                        <i class="fa-solid fa-expand"></i> Scan Foto
+                    </button>
+                </div>
+
+                <!-- Brand Name Input -->
+                <div>
+                    <label for="brandName" class="block text-xs font-medium text-slate-300 mb-1.5">
+                        Nama Brand / Produk <span class="text-rose-400">*</span>
+                    </label>
+                    <div class="relative">
+                        <input type="text" id="brandName" placeholder="Contoh: Skintific Cover All Perfect Cushion" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all">
+                        <div id="scanStatusBadge" class="hidden absolute right-3 top-2.5 text-xs text-emerald-400 flex items-center gap-1 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-800">
+                            <i class="fa-solid fa-check"></i> Terdeteksi
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Link Input -->
+                <div>
+                    <label for="productUrl" class="block text-xs font-medium text-slate-300 mb-1.5">
+                        Link Produk (Shopee / Tokopedia / TikTok Shop) <span class="text-slate-500">(Opsional)</span>
+                    </label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500 text-xs">
+                            <i class="fa-solid fa-link"></i>
+                        </span>
+                        <input type="url" id="productUrl" placeholder="https://shopee.co.id/product/..." class="w-full bg-slate-900 border border-slate-700/80 rounded-xl pl-9 pr-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all">
+                    </div>
+                    <p class="text-[11px] text-slate-400 mt-1">AI akan menganalisis konteks produk dari link jika tersedia.</p>
+                </div>
+            </div>
+
+            <!-- Options Card -->
+            <div class="glass-card rounded-2xl p-6 shadow-xl space-y-5">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                    <h2 class="font-bold text-base text-white flex items-center gap-2">
+                        <i class="fa-solid fa-filter text-purple-400"></i> Pengaturan Script
+                    </h2>
+                    <span class="text-xs text-slate-400">Langkah 2 dari 2</span>
+                </div>
+
+                <!-- Style / Tone of Language -->
+                <div>
+                    <label for="toneSelect" class="block text-xs font-medium text-slate-300 mb-1.5">Gaya Bahasa (Tone)</label>
+                    <select id="toneSelect" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500 transition-all cursor-pointer">
+                        <option value="Storytelling & Curhat Masalah">Storytelling & Problem Solving (Soft Sell)</option>
+                        <option value="Hard Sell & Promo Diskon">Hard Sell, Diskon & Bonus (Langsung Jualan)</option>
+                        <option value="Review Jujur & Edukatif">Review Jujur, Tes Kualitas & Edukatif</option>
+                        <option value="FOMO & Urgensi Tinggi">FOMO & Urgensi (Stok Kritis / Flash Sale)</option>
+                        <option value="Humoris & Santai Gaul">Humoris, Santai & Bahasa Anak Muda</option>
+                        <option value="Aesthetic & Minimalis">Aesthetic, Elegan & Racun Tiktok</option>
+                    </select>
+                </div>
+
+                <!-- Script Length & Target Output Count -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="lengthSelect" class="block text-xs font-medium text-slate-300 mb-1.5">Panjang Tulisan</label>
+                        <select id="lengthSelect" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-blue-500 transition-all cursor-pointer">
+                            <option value="Pendek (15-30 detik - TikTok / Reels)">Pendek (15-30 dtk)</option>
+                            <option value="Sedang (30-60 detik - Standard Video)" selected>Sedang (30-60 dtk)</option>
+                            <option value="Panjang (1-3 menit - Review Detail YouTube/VT)">Panjang (1-3 mnt)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="countSelect" class="block text-xs font-medium text-slate-300 mb-1.5">Jumlah Hasil</label>
+                        <select id="countSelect" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-blue-500 transition-all cursor-pointer">
+                            <option value="1">1 Variasi</option>
+                            <option value="2" selected>2 Variasi</option>
+                            <option value="3">3 Variasi</option>
+                            <option value="4">4 Variasi</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button id="btnGenerate" type="button" class="w-full py-3.5 px-6 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold rounded-xl shadow-lg shadow-indigo-500/25 transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 text-sm tracking-wide">
+                    <i class="fa-solid fa-bolt-lightning text-yellow-300"></i>
+                    <span>Buatkan Script Sekarang!</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- RIGHT PANEL: Output Results Cards -->
+        <section class="lg:col-span-7 flex flex-col space-y-4">
+            
+            <div class="flex items-center justify-between bg-slate-900/60 p-4 rounded-2xl border border-slate-800">
+                <div class="flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full bg-blue-500"></div>
+                    <h2 class="font-bold text-sm text-white">Hasil Script Konten AI</h2>
+                </div>
+                <div id="resultsCountBadge" class="text-xs text-slate-400">
+                    Menunggu pembuatan script...
+                </div>
+            </div>
+
+            <!-- Placeholder State -->
+            <div id="placeholderState" class="glass-card rounded-2xl p-10 text-center flex flex-col items-center justify-center min-h-[400px]">
+                <div class="w-20 h-20 rounded-full bg-slate-800/80 border border-slate-700/50 flex items-center justify-center text-slate-500 mb-4 animate-bounce">
+                    <i class="fa-solid fa-feather-pointed text-3xl text-blue-400"></i>
+                </div>
+                <h3 class="text-base font-bold text-white mb-2">Script Belum Dibuat</h3>
+                <p class="text-xs text-slate-400 max-w-sm mb-6">Isi nama brand atau scan foto produk Anda di panel sebelah kiri, lalu klik tombol "Buatkan Script Sekarang!".</p>
+                <div class="flex flex-wrap justify-center gap-2 text-[11px] text-slate-400">
+                    <span class="px-2.5 py-1 rounded-full bg-slate-800 border border-slate-700">✨ Hook Penasaran</span>
+                    <span class="px-2.5 py-1 rounded-full bg-slate-800 border border-slate-700">🎬 Visual Scripting</span>
+                    <span class="px-2.5 py-1 rounded-full bg-slate-800 border border-slate-700">🛒 CTA Tinggi Konversi</span>
+                </div>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loadingState" class="hidden glass-card rounded-2xl p-12 text-center flex flex-col items-center justify-center min-h-[400px]">
+                <div class="relative w-16 h-16 mb-4">
+                    <div class="absolute inset-0 rounded-full border-4 border-blue-500/20 border-t-blue-500 animate-spin"></div>
+                    <div class="absolute inset-2 rounded-full border-4 border-purple-500/20 border-b-purple-500 animate-spin" style="animation-direction: reverse;"></div>
+                </div>
+                <h3 class="text-sm font-bold text-white mb-1">Mencari Data & Meracik Script...</h3>
+                <p class="text-xs text-slate-400 max-w-xs">AI sedang meriset sudut pandang penjualan terbaik dan menyusun hook yang bikin FYP.</p>
+            </div>
+
+            <!-- Cards Grid Container -->
+            <div id="cardsContainer" class="space-y-6"></div>
+
+        </section>
+
+    </main>
+
+    <!-- CAMERA / SCANNER MODAL -->
+    <div id="scanModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+            <!-- Modal Header -->
+            <div class="px-5 py-4 border-b border-slate-800 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-camera text-blue-400"></i>
+                    <h3 class="font-bold text-sm text-white">Scan / Foto Produk</h3>
+                </div>
+                <button id="btnCloseScanModal" class="text-slate-400 hover:text-white p-1 text-sm">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content Body -->
+            <div class="p-5 space-y-4">
+                <!-- Video Stream Canvas Container -->
+                <div class="relative bg-black rounded-xl aspect-video overflow-hidden border border-slate-800 flex items-center justify-center">
+                    <video id="webcamVideo" class="w-full h-full object-cover hidden" autoplay playsinline></video>
+                    <img id="imagePreview" class="w-full h-full object-contain hidden" />
+                    <canvas id="canvasCapture" class="hidden"></canvas>
+                    
+                    <div id="cameraPlaceholder" class="text-center p-4">
+                        <i class="fa-solid fa-camera-retro text-3xl text-slate-600 mb-2"></i>
+                        <p class="text-xs text-slate-400">Gunakan Kamera atau Upload File Foto Produk</p>
+                    </div>
+
+                    <div id="scanningOverlay" class="hidden absolute inset-0 bg-blue-900/30 flex flex-col items-center justify-center backdrop-blur-xs">
+                        <div class="w-12 h-12 border-4 border-blue-400 border-t-transparent rounded-full animate-spin mb-2"></div>
+                        <span class="text-xs font-semibold text-white bg-slate-900/80 px-3 py-1 rounded-full border border-blue-400/30">Menganalisis Foto...</span>
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <div class="flex flex-col gap-2">
+                    <div class="grid grid-cols-2 gap-2">
+                        <button id="btnStartCamera" type="button" class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-medium border border-slate-700 flex items-center justify-center gap-2 transition-all">
+                            <i class="fa-solid fa-video"></i> Buka Kamera
+                        </button>
+                        <label class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-medium border border-slate-700 flex items-center justify-center gap-2 cursor-pointer transition-all">
+                            <i class="fa-solid fa-upload"></i> Upload File
+                            <input type="file" id="fileInput" accept="image/*" class="hidden">
+                        </label>
+                    </div>
+
+                    <button id="btnCapturePhoto" type="button" class="hidden w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-md">
+                        <i class="fa-solid fa-circle"></i> Ambil Foto & Analisis
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
